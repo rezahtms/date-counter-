@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Counters from "./components/Counters";
+import Message from "./components/Message";
+import "./App.css";
 function App() {
+  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Counters
+        count={count}
+        handleDecrease={() => setCount((current) => setCount(current - step))}
+        handleIncrease={() => setCount((current) => current + step)}
+      />
+      <Counters
+        count={count}
+        handleDecrease={() => setStep((current) => current - 1)}
+        handleIncrease={() => setStep((current) => current + 1)}
+        step={step}
+      />
+
+      <Message count={count} />
     </div>
   );
 }
